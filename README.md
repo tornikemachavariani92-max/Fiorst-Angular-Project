@@ -11,7 +11,7 @@ A dynamic web application featuring complete user authentication, a shopping car
 ## 🛠️ Tech Stack
 
 *   **Front-End:** Angular, JavaScript, RxJS, CSS
-*   **Database & Auth:** Firebase Firestore & Firebase Authentication
+
 
 ## 💻 Getting Started
 
