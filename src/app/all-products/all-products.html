@@ -1,0 +1,134 @@
+  <div class="mainContainer">
+<div class="mainContainer1">
+  <div class="page-indicator">
+    <div class="icon-container">
+      <div class="chevron">
+        <p>Home</p>
+        <i class="fa-solid fa-chevron-right my-icon"></i>
+      </div>
+      <div class="chevron">
+        <p>Order Page</p>
+        <i class="fa-solid fa-cart-shopping"></i>
+      </div>
+    </div>
+
+    <div class="filter-menu">
+      <h3 class="menu-title">Browse by :</h3>
+
+      <div class="filter-group">
+        <div class="filter-item" (click)="isCategoryOpen.set(!isCategoryOpen())">
+          <span>Category</span>
+          <i class="fa-solid" [ngClass]="isCategoryOpen() ? 'fa-minus' : 'fa-plus'"></i>
+        </div>
+        <ul class="category-list" [class.open]="isCategoryOpen()">
+          <li *ngFor="let cat of categories()" (click)="filterByCategory(cat.id || cat._id)"
+            [class.active]="selectedCategoryId() === (cat.id || cat._id || cat.name)">
+            <img [src]="cat.image" width="20" style="margin-right: 8px;"> {{ cat.name }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-item" (click)="isBrandOpen.set(!isBrandOpen())">
+          <span>Brand</span>
+          <i class="fa-solid" [ngClass]="isBrandOpen() ? 'fa-minus' : 'fa-plus'"></i>
+        </div>
+        <ul class="brand-list" [class.open]="isBrandOpen()">
+          <li *ngFor="let brand of brands()" (click)="filterByBrand(brand)" [class.active]="selectedBrand() === brand">
+            {{ brand }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="rating-section">
+        <h4>ფილტრაცია რეიტინგით:</h4>
+        <div class="stars">
+          <i *ngFor="let star of [1, 2, 3, 4, 5]" (click)="filterByRating(star)"
+             [class.fas]="selectedRating() >= star" [class.far]="selectedRating() < star" class="fa-star"
+             style="cursor: pointer; color: #ffca08; font-size: 20px; margin-right: 5px;">
+          </i>
+        </div>
+        <p *ngIf="selectedRating() > 0" (click)="filterByRating(0)"
+           style="cursor: pointer; font-size: 12px; color: #5488a2; margin-top: 5px;">
+          ✖ ფილტრის მოხსნა
+        </p>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-item" (click)="togglePrice()">
+          <span>Price</span>
+          <i class="fa-solid fa-plus" [class.rotate]="isPriceOpen()"></i>
+        </div>
+        @if (isPriceOpen()) {
+        <div class="price-filter">
+          <div class="price-input-group">
+            <label>Min Price:</label>
+            <input type="number" [ngModel]="tempMin()" (ngModelChange)="tempMin.set($event)" placeholder="0">
+          </div>
+          <div class="price-input-group">
+            <label>Max Price:</label>
+            <input type="number" [ngModel]="tempMax()" (ngModelChange)="tempMax.set($event)" placeholder="0">
+          </div>
+          <button (click)="applyPriceFilter()" class="filter-apply-btn">Apply</button>
+        </div>
+        }
+      </div>
+
+      <div class="filter-item get-all" (click)="resetFilters()" style="cursor: pointer;">
+        <strong>GET ALL</strong>
+        <i class="fa-solid fa-reply-all pulse-icon"></i>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+  
+
+
+  
+
+<div class="paginationAndCardColaboration">
+<div class="card-container">
+  @for (item of displayCards(); track item._id) {
+    <app-card [item]="item"></app-card>
+  } @empty {
+    <p>პროდუქტები ვერ მოიძებნა</p>
+  }
+</div>
+
+<div class="pagination-container">
+  <div class="pagination-list">
+    
+    <button 
+      class="page-btn nav-btn" 
+      [disabled]="currentPage() === 1" 
+      (click)="onPageClick(currentPage() - 1)">
+      &laquo;
+    </button>
+
+   @for (page of pageList(); track page) { 
+   <button 
+     class="page-btn" 
+     [class.active]="page === currentPage()" 
+     (click)="onPageClick(page)">
+     {{ page }}
+   </button>
+}
+    
+
+    <button 
+      class="page-btn nav-btn" 
+      [disabled]="currentPage() === pageList.length" 
+      (click)="onPageClick(currentPage() + 1)">
+      &raquo;
+    </button>
+
+  </div>
+</div>
+</div>
+
+
+  </div>
+
+

@@ -1,0 +1,155 @@
+// დაამატე poppins, თუ ჯერ არ გაქვს მთლიან პროექტში
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.card {
+  width: 98%;
+  height: auto;
+  font-family: 'Poppins', sans-serif; // სუფთა და თანამედროვე ფონტი
+  background: rgba(255, 255, 255, 0.03); // Glassmorphism ეფექტი
+  backdrop-filter: blur(10px); // მინის ეფექტი
+  border: 1px solid rgba(255, 255, 255, 0.05); // თხელი ჩარჩო
+  border-radius: 20px; // მომრგვალებული კუთხეები
+  overflow: hidden; // რომ სურათი არ გამოვიდეს კუთხეებიდან
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); // რბილი ჩრდილი
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); // "Bounce" ანიმაცია hover-ზე
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  
+  // -- Hover ეფექტები მთლიან ბარათზე --
+  &:hover {
+    transform: translateY(-10px); // ბარათი "ამოდის" ზევით
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); // ჩრდილი მუქდება
+    border-color: rgba(38, 166, 154, 0.3); // ჩარჩო იღებს შენს ფერს
+  }
+
+  // 1. სურათის სექცია
+  .card__image {
+    width: 100%;
+    height: 220px; // ფიქსირებული სიმაღლე
+    object-fit: contain; // სურათი არ "გაიწელოს", მოთავსდეს
+    padding: 20px; // პატარა დაშორება ჩარჩოდან
+    background: rgba(255, 255, 255, 0.02); // სურათის ქვეშ მსუბუქი ფონი
+    transition: transform 0.5s ease;
+
+    // სურათი ოდნავ დიდდება hovering-ისას
+    .card:hover & {
+      transform: scale(1.05);
+    }
+  }
+
+  // 2. შიგთავსის სექცია (სათაური, ფასი)
+  .card__content {
+    padding: 20px;
+    flex-grow: 1; // იკავებს დარჩენილ ადგილს
+    display: flex;
+    flex-direction: column;
+    gap: 8px; // დაშორება სათაურსა და ფასს შორის
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis; // თუ სათაური დიდია, დააწერს "..."
+      display: -webkit-box;
+      -webkit-line-clamp: 2; // მაქსიმუმ 2 ხაზი
+      -webkit-box-orient: vertical;
+       line-clamp: 2;
+       overflow: hidden;
+    }
+
+    p {
+      font-size: 20px;
+      font-weight: 700;
+      color: #26a69a; // შენი ძირითადი ფერი ფასისთვის
+      margin: 0;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  // 3.ღილაკების სექცია
+  .card__actions {
+    padding: 15px 20px 20px; // მეტი დაშორება ქვემოთ
+    display: grid;
+    grid-template-columns: 1fr 1fr; // ორი თანაბარი ღილაკი
+    gap: 12px; // დაშორება ღილაკებს შორის
+
+    // -- საერთო სტილი ორივე ღილაკისთვის --
+    .view-details-btn, .add-to-cart-btn {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      text-decoration: none; // routerLink-ისთვის
+      border: none;
+    }
+
+    // -- "დეტალები" ღილაკი --
+    .view-details-btn {
+      background: rgba(255, 255, 255, 0.05);
+      color: #94a3b8;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+      }
+    }
+
+    // -- "კალათაში" ღილაკი --
+    .add-to-cart-btn {
+      background: #26a69a; // შენი მომწვანო ფერი
+      color: white;
+      box-shadow: 0 4px 10px rgba(38, 166, 154, 0.2);
+
+      &:hover:not(:disabled) {
+        background: #2bbbad; // ოდნავ ღია ფერი hover-ზე
+        box-shadow: 0 6px 15px rgba(38, 166, 154, 0.3);
+        transform: translateY(-2px);
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(0); // დაჭერისას ბრუნდება
+      }
+
+      // -- "არ არის მარაგში" სტილი --
+      &.disabled {
+        background: rgba(255, 255, 255, 0.05) !important;
+        color: rgba(255, 255, 255, 0.2) !important;
+        box-shadow: none !important;
+        cursor: not-allowed;
+        
+        i { opacity: 0.5; }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+@media (min-width: 600px) and (max-width: 768px) {
+  .card{
+    width: 90%;
+    height: auto;
+  }
+
+  
+  
+}
+
+
+
+

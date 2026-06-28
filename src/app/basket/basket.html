@@ -1,0 +1,83 @@
+<div class="container">
+        <header class="cart-header">
+            <a (click)="goToAllProducts()" class="back-link" style="cursor: pointer;">
+  <i class="fas fa-arrow-left"></i> უკან დაბრუნება
+</a>
+            <h1>შენი კალათა (<span>{{ cartCount }}</span>)</h1>
+        </header>
+
+        <div class="cart-layout">
+            
+            <section class="cart-items-container">
+                <div id="cartItemsList" class="cart-list">
+                    @if (cartItems.length === 0) {
+                        <div class="empty-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h3>კალათა ცარიელია</h3>
+                            <p>დაამატეთ პროდუქტები კალათაში</p>
+                        </div>
+                    } @else {
+                        @for (item of cartItems; track item.productId; let i = $index) {
+                            <div class="cart-item">
+                                <img [src]="item.product?.image || item.image || item.thumbnail" class="cart-item-img" [alt]="item.product?.title || item.title || item.name">
+                                
+                                <div class="cart-item-info">
+                                    <h4>{{ item.product?.title || item.title || item.name }}</h4>
+                                    <p>Category: {{ item.product?.category?.name || item.category?.name || 'Unknown' }}</p>
+                                    <div *ngFor="let item of cartItems" class="cart-item">
+  <img [src]="item.product?.image" width="50">
+  <h4>{{ item.product?.title }}</h4>
+  
+  <div class="quantity-controls">
+    <button (click)="changeQuantity(item, -1)">-</button>
+    <span class="qty-number">{{ item.quantity }}</span>
+    <button (click)="changeQuantity(item, 1)">+</button>
+  </div>
+  
+  <div class="price-info">
+    <p>ერთეულის ფასი: {{ item.pricePerQuantity }} ₾</p>
+    <p>ჯამი: {{ item.pricePerQuantity * item.quantity }} ₾</p>
+  </div>
+</div>
+                                </div>
+
+                                <div class="cart-item-price">{{ ((item.product?.price?.current || item.product?.price) || (item.price?.current || item.price) || item.pricePerQuantity || 0) * (item.quantity || 1) }} {{ item.product?.price?.currency || item.price?.currency || '₾' }}</div>
+
+                                <button (click)="removeItem(item.productId)" class="remove-item-btn">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        }
+                    }
+                </div>
+            </section>
+
+            <aside class="cart-summary">
+                <div class="summary-card">
+                    <h2>შეკვეთის დეტალები</h2>
+                    
+                    <div class="summary-row">
+                        <span>შუალედური ჯამი</span>
+                        <span>{{ totalPrice }} ₾</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>მიწოდება</span>
+                        <span>უფასო</span>
+                    </div>
+                    
+                    <div class="divider"></div>
+                    
+                    <div class="summary-total">
+                        <span>სულ გადასახდელი:</span>
+                        <span>{{ totalPrice }} ₾</span>
+                    </div>
+
+                    <button class="checkout-btn">ყიდვა</button>
+                    <button (click)="clearCart()" class="clear-cart-btn">
+                        <i class="fas fa-trash"></i> კალათის გასუფთავება
+                    </button>
+                </div>
+            </aside>
+
+        </div>
+    </div>

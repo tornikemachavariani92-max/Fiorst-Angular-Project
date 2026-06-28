@@ -1,0 +1,330 @@
+.quantity-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+
+  .label {
+    font-size: 14px;
+    color: #666;
+  }
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f1f3f5;
+  padding: 4px 8px;
+  border-radius: 20px; // მომრგვალებული ფორმა მთლიანი კონტეინერისთვის
+
+  .qty-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%; // აკეთებს იდეალურ წრეს
+    border: none;
+    background: white;
+    color: #5488a2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #5488a2;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  .qty-value {
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+    font-size: 15px;
+    color: #333;
+  }
+}
+
+
+/* მთავარი კონტეინერი */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* ჰედერი და უკან დაბრუნების ლინკი */
+.cart-header {
+    margin-bottom: 30px;
+}
+
+.back-link {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 15px;
+    transition: 0.2s;
+    cursor: pointer
+}
+
+.back-link:hover {
+    color: #2980b9;
+    transform: translateX(-5px);
+}
+
+.cart-header h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* განლაგება: პროდუქტები მარცხნივ, ჯამი მარჯვნივ */
+.cart-layout {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* პროდუქტების სექცია */
+.cart-items-container {
+    flex: 2; /* უფრო მეტი ადგილი პროდუქტებისთვის */
+}
+
+.cart-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+/* თუ კალათა ცარიელია */
+.cart-list:empty::after {
+    content: 'კალათა ცარიელია 🛒';
+    display: block;
+    padding: 40px;
+    text-align: center;
+    background: #f9f9f9;
+    border-radius: 10px;
+    color: #7f8c8d;
+    font-size: 1.2rem;
+}
+
+/* მარჯვენა პანელი - შეკვეთის დეტალები */
+.cart-summary {
+    flex: 1;
+    position: sticky;
+    top: 20px;
+}
+
+.summary-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+}
+
+.summary-card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #555;
+}
+
+.divider {
+    height: 1px;
+    background: #eee;
+    margin: 20px 0;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #27ae60;
+    margin-bottom: 25px;
+}
+
+/* ღილაკები */
+.checkout-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 10px;
+}
+
+.checkout-btn:hover {
+    background-color: #219150;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.clear-cart-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.clear-cart-btn:hover {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* თითოეული პროდუქტის ბარათი კალათაში */
+.cart-item {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid #f0f0f0;
+    transition: transform 0.2s ease;
+}
+
+.cart-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* პროდუქტის სურათი */
+.cart-item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+/* პროდუქტის ინფორმაცია (სახელი და კატეგორია) */
+.cart-item-info {
+    flex-grow: 1; /* იკავებს დარჩენილ ადგილს */
+}
+
+.cart-item-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.cart-item-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* ფასი */
+.cart-item-price {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin: 0 20px;
+    white-space: nowrap;
+}
+
+/* წაშლის ღილაკი (X ან ნაგვის ურნა) */
+.remove-item-btn {
+    background: #fff5f5;
+    color: #e74c3c;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.remove-item-btn:hover {
+    background: #e74c3c;
+    color: #fff;
+}
+
+
+
+@media (min-width: 320px) and (max-width: 481px) {
+    .cart-layout {
+        display: flex;
+        flex-direction: column;
+
+        .cart-items-container  {
+            width: 300px;
+            height: 250px;
+        }
+
+        .cart-item {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .cart-layout {
+        display: flex;
+        flex-direction: column;
+
+        .cart-items-container  {
+            width: 425px;
+            height: 250px;
+        }
+
+        .cart-item {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+.cart-layout {
+        display: flex;
+        flex-direction: column;
+
+        .cart-items-container  {
+            width: 600px;
+            height: 250px;
+        }
+
+        .cart-item {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+}

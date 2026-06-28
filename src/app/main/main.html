@@ -1,0 +1,29 @@
+  <section class="hero">
+  <div class="hero__slide" style="background-image: url('c837a6_837f9cd4f59146c3ad47a2bd882fedfd~mv2.avif');"></div>
+  <div class="hero__slide" style="background-image: url('c837a6_9c1280daaeb0481abc58e6e236efdf59~mv2.avif');"></div>
+  <div class="hero__slide" style="background-image: url('c837a6_f58829a26e594ca3aa72383e19cf39b9~mv2.avif');"></div>
+
+  <div class="hero__overlay"></div>
+   <div class="hero__content">
+    <h1 class="welcome-h1">Incredible Prices on All Your Favorite Items</h1>
+    <p class="welcome-p">Get more for less on selected brands</p>
+    <button class="btn-shop" routerLink="/allProducts">
+      <span class="btn-text">Shop Now</span>
+    </button>
+  </div>
+</section>
+<section class='best-sellers-title'>
+  
+  <h4 class="sellers-title">Best Sellers</h4>
+
+  <div class="products-grid">
+    @for (product of bestSellers(); track product._id) {
+      <app-card [item]="product"></app-card>
+    }
+  </div>
+</section>
+
+
+
+
+

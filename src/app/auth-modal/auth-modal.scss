@@ -1,0 +1,155 @@
+/* მთავარი კონტეინერი */
+.auth-modal-content {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 500px; /* Sign Up-ისთვის ცოტა ფართო ჯობია */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.auth-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* ნახევრად გამჭვირვალე შავი ფონი */
+  backdrop-filter: blur(5px);   /* ფონის დანისვლა (Blur) უფრო თანამედროვეა */
+  
+  /* აი ეს სამი ხაზი სვამს შუაში: */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  z-index: 1000;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+h2 {
+  color: #1a1a1a;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* ფორმის ჯგუფები */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #444;
+  font-size: 14px;
+}
+
+/* ინპუტების სტილი */
+input, select {
+  width: 80%;
+  padding: 12px 16px;
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  outline: none;
+  background: #fdfdfd;
+}
+
+input:focus, select:focus {
+  border-color: #3085d6;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(48, 133, 214, 0.1);
+}
+
+/* Sign Up-ის Grid სისტემა (რომ ბევრი ველი ლამაზად ჩაეტიოს) */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* ორ სვეტად ყოფს */
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+/* გამონაკლისი: იმეილი და მისამართი დაიკავებს მთლიან ხაზს */
+.form-grid input[formControlName="email"],
+.form-grid input[formControlName="address"],
+.form-grid input[formControlName="avatar"] {
+  grid-column: span 2;
+}
+
+/* ღილაკის სტილი */
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #3085d6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 10px;
+}
+
+.btn-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+}
+
+.btn-submit:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+/* ლინკის გადასასვლელი */
+.form-toggle {
+  text-align: center;
+  margin-top: 20px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.form-toggle a {
+  color: #3085d6;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.form-toggle a:hover {
+  text-decoration: underline;
+}
+
+.closebutton {
+  width: 10%;
+  height: auto;
+  border: none;
+  
+  
+
+}
+
+/* მობილურისთვის */
+@media (max-width: 480px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-grid input {
+    grid-column: span 1 !important;
+  }
+}

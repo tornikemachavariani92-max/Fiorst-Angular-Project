@@ -1,0 +1,25 @@
+@if (item) {
+  <article class="card">
+    <img class="card__image"
+         [src]="item.images?.[0]"
+         [alt]="item.title">
+
+    <div class="card__content">
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.price?.current }} {{ item.price?.currency }}</p>
+    </div>
+
+    <div class="card__actions">
+      <a [routerLink]="['/product', item._id]" class="view-details-btn">
+        <i class="fas fa-eye"></i> დეტალები
+      </a>
+      <button (click)="addToCart(item)" 
+              class="add-to-cart-btn" 
+              [disabled]="item.stock <= 0"
+              [class.disabled]="item.stock <= 0">
+        <i class="fas fa-cart-plus"></i> 
+        {{ item.stock <= 0 ? 'არ არის მარაგში' : 'კალათაში' }}
+      </button>
+    </div>
+  </article>
+}

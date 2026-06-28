@@ -1,0 +1,322 @@
+.comercialsSection {
+  max-width: 1500px;
+  margin: 20px auto;
+  background-color: #e8e8e8;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 30px 0; 
+  }
+}
+
+.comercial-container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box; 
+}
+
+.comercial-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1 1 200px; /* მინიმუმ 200პქ იქნება, მერე კი გაიზრდება */
+    max-width: 250px;
+}
+
+.icon-box img {
+    width: 50px; /* დაარეგულირე ზომა */
+    height: auto;
+}
+
+/* მობილურისთვის */
+@media (max-width: 600px) {
+    .comercial-item {
+        flex: 1 1 100%; /* მობილურზე თითო ხაზზე თითო ბლოკი */
+    }
+}
+
+@keyframes bikeMove {
+  0% {
+    transform: translateX(0); // საწყისი პოზიცია
+  }
+  100% {
+    transform: translateX(180px); // მანძილი, რომელიც უნდა გაიაროს (შეცვალე საჭიროებისამებრ)
+  }
+}
+
+.comercial-bike {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  position: relative;
+  // როცა მაუსს მივიტანთ .comercial ბლოკზე
+  &:hover {
+    .bike-icon {
+      animation: bikeMove 0.8s linear forwards; 
+      // 1s - სიჩქარე, forwards - რომ გაჩერდეს ბოლოში და უკან არ "გამოხტეს" უცებ
+    }
+  }
+  p {
+    margin: 0;
+    font-weight: 600;
+    max-width: 100px;
+    color: #000000; // საწყისი ფერი
+    transition: all 0.3s ease; // ეს ხაზი აუცილებელია რბილი გადასვლისთვის
+  }
+
+  // როცა მაუსს მივიტანთ მთლიან ბლოკზე (.comercial)
+  &:hover {
+    p {
+      color: #751FFF;    // ფერი შეიცვლება იასამნისფერით (როგორც SVG-შია)
+      transform: scale(1.1); // ტექსტი გაიზრდება 10%-ით
+    }
+
+    .bike-icon {
+      animation: bikeMove 1s ease-in-out forwards;
+    }
+  }
+}
+
+@keyframes boxMove {
+  0%, 100% {
+    transform: translateY(0); // საწყისი პოზიცია
+  }
+  50% {
+    transform: translateY(-40px); // მანძილი, რომელიც უნდა გაიაროს (შეცვალე საჭიროებისამებრ)
+  }
+}
+
+.comercial-box {
+display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  position: relative;
+p {
+    margin: 0;
+    font-weight: 600;
+    max-width: 100px;
+    color: #000000; // საწყისი ფერი
+    transition: all 0.3s ease; // ეს ხაზი აუცილებელია რბილი გადასვლისთვის
+  }
+  &:hover {
+    p {
+      color: #751FFF;    // ფერი შეიცვლება იასამნისფერით (როგორც SVG-შია)
+      transform: scale(1.1); // ტექსტი გაიზრდება 10%-ით
+    }
+
+  &:hover {
+    .box-icon {
+      animation: boxMove 1s ease-in-out;
+    }
+  } 
+
+}
+}
+
+@keyframes procentMove {
+  0%, 100% {
+    transform: translateX(0); // საწყისი პოზიცია
+  }
+  50% {
+    transform: translateX(-40px); // მანძილი, რომელიც უნდა გაიაროს (შეცვალე საჭიროებისამებრ)
+  }
+}
+
+
+.comercial-procent {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  position: relative;
+p {
+    margin: 0;
+    font-weight: 600;
+    max-width: 100px;
+    color: #000000; // საწყისი ფერი
+    transition: all 0.3s ease; // ეს ხაზი აუცილებელია რბილი გადასვლისთვის
+  }
+  &:hover {
+    p {
+      color: #751FFF;    // ფერი შეიცვლება იასამნისფერით (როგორც SVG-შია)
+      transform: scale(1.1); // ტექსტი გაიზრდება 10%-ით
+    }
+
+    &:hover {
+      .procent-icon {
+        animation: procentMove 1s ease-in-out;
+      }
+    }
+
+}
+}
+
+@keyframes spinningClock {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.comercial-clock {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  position: relative;
+p {
+    margin: 0;
+    font-weight: 600;
+    max-width: 100px;
+    color: #000000; // საწყისი ფერი
+    transition: all 0.3s ease; // ეს ხაზი აუცილებელია რბილი გადასვლისთვის
+  }
+   &:hover {
+    p {
+      color: #751FFF;    // ფერი შეიცვლება იასამნისფერით (როგორც SVG-შია)
+      transform: scale(1.1); // ტექსტი გაიზრდება 10%-ით
+    }
+
+    &:hover {
+      .clock-icon {
+        animation: spinningClock 0.3s ease-in-out forwards;
+
+
+    }
+  }
+
+}
+}
+
+
+
+
+
+  .bike-icon {
+   display: block;
+    width: 100px;  
+    height: auto;  
+    min-width: 78px; 
+    flex-shrink: 0;
+     height: auto;
+    transition: all 0.5s ease;
+  }
+
+  .box-icon {
+     display: block;
+    width: 100px;  
+    height: auto;  
+    min-width: 78px; 
+    flex-shrink: 0;
+     height: auto;
+    transition: all 0.5s ease;
+  }
+
+  .procent-icon {
+    display: block;
+    width: 100px;  
+    height: auto;  
+    min-width: 78px; 
+    flex-shrink: 0;
+     height: auto;
+    transition: all 0.5s ease;
+  }
+
+  .clock-icon {
+    display: block;
+    width: 100px;  
+    height: auto;  
+    min-width: 78px; 
+    flex-shrink: 0;
+     height: auto;
+    transition: all 0.5s ease;
+  }
+
+.main-footer {
+  width: 100%;
+  border-top: 1px solid #eeeeee; // ზედა გამყოფი ხაზი
+  padding-top: 40px;
+  background-color: rgb(84, 136, 162);
+   background-color: rgb(84, 136, 162); // ნაცრისფერი ფონი სურათიდან
+    padding: 20px 0;
+    text-align: center;
+
+    p {
+      margin: 0;
+      font-size: 15px;
+      color: #fafdff; 
+      font-family: serif;
+      word-spacing: 2px;
+    }
+}
+
+.methods-container {
+      max-width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 40px; // დაშორება ლოგოებს შორის
+      flex-wrap: wrap; // რესპონსივისთვის
+
+      img {
+        height: 35px; // ლოგოების სიმაღლის გათანაბრება
+        width: auto;
+        filter: grayscale(20%); // სურვილისამებრ: მცირე რეტრო ეფექტი
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.1); // მაუსის მიტანისას მცირე ზრდა
+          filter: grayscale(0%);
+        }
+      }
+    }
+
+    .payment-methods {
+    text-align: center;
+    margin-bottom: 40px;
+
+    p {
+      font-size: 18px;
+      color: #fafdff;
+      margin-bottom: 30px;
+      font-family: serif; // სურათზე არსებული ფონტის სტილი
+    }
+
+    .methods-container {
+      max-width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 40px; // დაშორება ლოგოებს შორის
+      flex-wrap: wrap; // რესპონსივისთვის
+
+      img {
+        height: 35px; // ლოგოების სიმაღლის გათანაბრება
+        width: auto;
+        filter: grayscale(20%); // სურვილისამებრ: მცირე რეტრო ეფექტი
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.1); // მაუსის მიტანისას მცირე ზრდა
+          filter: grayscale(0%);
+        }
+      }
+    }
+  }

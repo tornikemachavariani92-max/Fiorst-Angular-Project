@@ -1,0 +1,81 @@
+<div class="product-details-container">
+  @if (loading) {
+    <div class="loading">
+      <p>იტვირთება...</p>
+    </div>
+  } @else if (error) {
+    <div class="error">
+      <p>შეცდომა მონაცემების წამოღებისას</p>
+      <button (click)="goBack()" class="back-btn">უკან დაბრუნება</button>
+    </div>
+  } @else if (product) {
+    <div class="product-details">
+      <!-- Back Button -->
+      <button (click)="goBack()" class="back-btn">
+        <i class="fas fa-arrow-left"></i> უკან
+      </button>
+
+      <div class="product-content">
+        <!-- Image Gallery -->
+        <div class="image-section">
+          <div class="main-image-container">
+            <img
+              [src]="mainImage"
+              [alt]="product.title"
+              class="main-image"
+              referrerpolicy="no-referrer"
+            />
+          </div>
+
+          @if (product.images && product.images.length > 0) {
+            <div class="thumbnails">
+              @for (image of product.images; track image) {
+                <img
+                  [src]="image"
+                  [alt]="'Thumbnail'"
+                  class="thumbnail"
+                  referrerpolicy="no-referrer"
+                  (click)="changeMainImage(image)"
+                  [class.active]="mainImage === image"
+                />
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Product Info -->
+        <div class="info-section">
+          <h1 class="product-title">{{ product.title }}</h1>
+          <p class="product-description">{{ product.description }}</p>
+
+          <div class="product-meta">
+            <div class="price">
+              <span class="current-price">
+                {{ product.price?.current }} {{ product.price?.currency }}
+              </span>
+            </div>
+            <div class="stock">
+              <span class="stock-status" [class.in-stock]="product.stock > 0" [class.out-of-stock]="product.stock === 0">
+                {{ product.stock > 0 ? 'მარაგშია: ' + product.stock + ' ცალი' : 'არ არის მარაგში' }}
+              </span>
+            </div>
+          </div>
+
+          <button
+            class="add-to-cart-btn"
+            (click)="addToCart()"
+            [disabled]="product.stock === 0"
+          >
+            <span class="label">
+              <i class="fas fa-cart-plus"></i>
+              {{ product.stock > 0 ? '+ Add to cart' : 'არ არის მარაგში' }}
+            </span>
+            <span class="gradient-container">
+              <span class="gradient"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

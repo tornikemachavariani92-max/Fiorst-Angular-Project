@@ -1,0 +1,201 @@
+  <header>
+  <div class = "header-container">
+  <h5 class="h5_text">FREE SHIPPING WORLDWIDE</h5>
+  </div>
+  
+    <div class="header">
+      <div class="digitalStore">
+        <a routerLink="/">
+         <img src="mylogo.svg" alt="My Logo" class="Page_logo">
+        </a>
+      
+      </div>
+    
+   <div class="header__search">
+    <input type="text" placeholder="Search for products..." id = "search-input"
+         [value]="searchTerm()" 
+         (input)="onSearchChange($event)" 
+         placeholder="Search products...">
+        <ul class="suggestions-dropdown" *ngIf="suggestions().length > 0">
+  <li *ngFor="let product of suggestions()" (click)="selectProduct(product)" class="suggestion-item">
+    
+    <div class="suggestion-content">
+      <div class="img-wrapper">
+        <img [src]="product.images?.[0]" 
+             (error)="$any($event.target).src = 'https://raw.githubusercontent.com/Koala-Bandit/no-image-found/main/no-image.png'" 
+             alt="product">
+      </div>
+      
+      <span class="suggestion-title">{{ product.title }}</span>
+    </div>
+
+  </li>
+</ul>
+    <button type="submit">Search</button>
+    <div class="search-suggestions" id="search-suggestions"></div>
+  </div>
+
+ 
+  
+<div class="header__actions">
+  <div class="header__right">
+    
+    @if (currentUser) {
+      <div class="profile-container" *ngIf="currentUser">
+  
+  <button class="profile-trigger" (click)="toggleDropdown()">
+    <div class="avatar-wrapper">
+      <img [src]="currentUser.avatar || 'assets/default-avatar.png'" alt="Avatar" class="avatar-img">
+    </div>
+    <span class="user-name">{{ currentUser.firstName }}</span>
+    <i class="fa-solid fa-chevron-down arrow-icon" [class.rotate]="isDropdownOpen"></i>
+  </button>
+
+<div class="profile-dropdown" *ngIf="isDropdownOpen">
+  <div class="dropdown-header">
+    <strong>{{ currentUser?.firstName }} {{ currentUser?.lastName }}</strong>
+    <span class="user-email">{{ currentUser?.email }}</span>
+  </div>
+  
+  <hr>
+
+  <div class="cart-preview">
+  <h5 class="section-title">
+    <i class="fa-solid fa-cart-shopping"></i> ჩემი კალათა
+  </h5>
+  
+  <p class="empty-cart" *ngIf="api.cartCount() === 0">კალათა ცარიელია</p>
+
+  <ul class="cart-items-list" *ngIf="api.cartCount() > 0">
+    <li *ngFor="let item of api.cartItems().slice(0, 3)" class="mini-cart-item">
+      <img [src]="item.image" alt="product">
+      <div class="item-info">
+        <span class="item-name">{{ item.title }}</span>
+        <span class="item-price">{{ item.price }} ₾</span>
+      </div>
+    </li>
+  </ul>
+
+  <button  class="view-cart-btn" (click)="goToCart()" *ngIf="api.cartCount() > 0"> 
+    <span class="circle1"></span>
+    <span class="circle2"></span>
+    <span class="circle3"></span>
+    <span class="circle4"></span>
+    <span class="circle5"></span>
+    <span class="text">ყველას ნახვა</span> ({{ api.cartCount() }})
+  </button>
+</div>
+
+  <hr>
+
+  <div class="user-details">
+    <div class="detail-item">
+      <i class="fa-solid fa-location-dot"></i>
+      <span>{{ currentUser?.address }}</span>
+    </div>
+  </div>
+
+  <button class="logout-btn" (click)="logout()">
+    <i class="fa-solid fa-right-from-bracket"></i> გამოსვლა
+  </button>
+</div>
+</div>
+    } 
+  </div>
+</div>
+<div class="header__controls">
+    
+    @if (!modalService.isLoggedIn()) {
+      <div class="header__auth">
+        <a class="btn-login" (click)="openLogin()">Log In</a>
+        <a class="btn-signup" (click)="openSignup()">Sign Up</a>
+      </div>
+    } 
+    @else {
+      <div class="user-actions">
+        <input id="checkbox2" type="checkbox" (click)="toggleMenu()">
+        <label class="toggle toggle2" for="checkbox2">
+          <div id="bar4" class="bars"></div>
+          <div id="bar5" class="bars"></div>
+          <div id="bar6" class="bars"></div>
+        </label>
+      </div>
+    } </div>
+
+
+
+<div class="menu-overlay" 
+     [class.active]="isMenuOpen()" 
+     (click)="closeMenu()">
+</div>
+
+<nav class="burger-menu" [class.active]="isMenuOpen()">
+  <button class="burger-close-btn" (click)="closeMenu()">&times;</button>
+  
+  <div class="burger-menu-header">
+    <h3>Navigation</h3>
+  </div>
+
+<ul class="burger-menu-list">
+  <li><a routerLink="/" (click)="closeMenu()">🏠 Home</a></li>
+  <li><a routerLink="/allProducts" (click)="closeMenu()">🛍️ Shop</a></li>
+
+  <li class="mobile-only">
+  <a (click)="toggleMobileProfile()" class="mobile-profile-toggle">
+    <span>👤 Profile</span>
+    <i class="fa-solid fa-chevron-down" [class.rotate]="isMobileProfileOpen"></i>
+  </a>
+
+  @if (isMobileProfileOpen) {
+    <div class="mobile-profile-info">
+      <div class="dropdown-header">
+        <strong>{{ currentUser?.firstName }} {{ currentUser?.lastName }}</strong>
+        <span class="user-email">{{ currentUser?.age }}</span>
+        <span class="user-email">{{ currentUser?.gender }}</span>
+        <span class="user-email">{{ currentUser?.address }}</span>
+        <span class="user-email">{{ currentUser?.phone }}</span>
+        <span class="user-email">{{ currentUser?.email }}</span>
+        
+      </div>
+
+      <div class="dropdown-section cart-link">
+  <a routerLink="/cart" (click)="goToCart()">
+    <div class="section-title">
+      <i class="fa-solid fa-cart-shopping"></i> 
+      <span>ჩემი კალათა</span>
+    </div>
+    
+    @if (api.cartCount() > 0) {
+      <span class="cart-badge-text">
+        გაქვთ {{ api.cartCount() }} პროდუქტი
+      </span>
+      
+      <ul class="mini-cart-list">
+        <li *ngFor="let item of api.cartItems().slice(0, 3)">
+          {{ item.title }} - {{ item.price?.current }} {{ item.price?.currency }}
+        </li>
+      </ul>
+      
+    } @else {
+      <span class="cart-empty-text">კალათა ცარიელია</span>
+    }
+  </a>
+</div>
+      
+      <ul class="mobile-submenu">
+        
+        <li><a (click)="modalService.logout(); closeMenu()">🚪 Logout</a></li>
+      </ul>
+    </div>
+  }
+
+  
+</li>
+</ul>
+  <div class="burger-menu-footer">
+    <p>© 2026 DigitalStore</p>
+  </div>
+</nav>
+  </div>
+
+</header>
